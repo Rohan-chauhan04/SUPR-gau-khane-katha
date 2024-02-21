@@ -37,7 +37,7 @@ MainScreen::MainScreen(QWidget *parent)
     ui->setupUi(this);
     loadQuizQuestions();
 
-    connect(ui->radioButton, SIGNAL(toggled(bool)), this, SLOT(onAnswerButtonToggled(bool)));
+    connect(ui->radioButton_1, SIGNAL(toggled(bool)), this, SLOT(onAnswerButtonToggled(bool)));
     connect(ui->radioButton_2, SIGNAL(toggled(bool)), this, SLOT(onAnswerButtonToggled(bool)));
     connect(ui->radioButton_3, SIGNAL(toggled(bool)), this, SLOT(onAnswerButtonToggled(bool)));
     connect(ui->radioButton_4, SIGNAL(toggled(bool)), this, SLOT(onAnswerButtonToggled(bool)));
@@ -79,21 +79,21 @@ void MainScreen::loadQuizQuestions()
 
 void MainScreen::displayCurrentQuestion()
 {
-    ui->radioButton->setChecked(false);
+    ui->radioButton_1->setChecked(false);
     ui->radioButton_2->setChecked(false);
     ui->radioButton_3->setChecked(false);
     ui->radioButton_4->setChecked(false);
 
     if (currentQuestionIndex < quizQuestions.size())
     {
-        ui->radioButton->setChecked(false);
+        ui->radioButton_1->setChecked(false);
         ui->radioButton_2->setChecked(false);
         ui->radioButton_3->setChecked(false);
         ui->radioButton_4->setChecked(false);
         const QuizQuestion &currentQuestion = quizQuestions[currentQuestionIndex];
         ui->question->setText(currentQuestion.question);
 
-        ui->radioButton->setText(currentQuestion.options[0]);
+        ui->radioButton_1->setText(currentQuestion.options[0]);
         ui->radioButton_2->setText(currentQuestion.options[1]);
         ui->radioButton_3->setText(currentQuestion.options[2]);
         ui->radioButton_4->setText(currentQuestion.options[3]);
@@ -366,18 +366,18 @@ void MainScreen::on_nextBtn_clicked()
 
     bool scoreUpdated = false;
     // ui->demo_label->hide();
-    ui->radioButton->setStyleSheet("background-color: none;");
+    ui->radioButton_1->setStyleSheet("background-color: none;");
     ui->radioButton_2->setStyleSheet("background-color: none;");
     ui->radioButton_3->setStyleSheet("background-color: none;");
     ui->radioButton_4->setStyleSheet("background-color: none;");
 
-    ui->radioButton->setAutoExclusive(false);
+    ui->radioButton_1->setAutoExclusive(false);
     ui->radioButton_2->setAutoExclusive(false);
     ui->radioButton_3->setAutoExclusive(false);
     ui->radioButton_4->setAutoExclusive(false);
 
     // Disable all radio buttons for the current question
-    ui->radioButton->setEnabled(false);
+    ui->radioButton_1->setEnabled(false);
     ui->radioButton_2->setEnabled(false);
     ui->radioButton_3->setEnabled(false);
     ui->radioButton_4->setEnabled(false);
@@ -388,7 +388,7 @@ void MainScreen::on_nextBtn_clicked()
         // Determine which radio button to check based on the loop index
         switch (i) {
         case 0:
-            myRadioButton = ui->radioButton;
+            myRadioButton = ui->radioButton_1;
             break;
         case 1:
             myRadioButton = ui->radioButton_2;
@@ -412,11 +412,11 @@ void MainScreen::on_nextBtn_clicked()
 
     // Move to the next question or handle as needed
     ++currentQuestionIndex;
-    updateScoreLabel();
+    // updateScoreLabel();
     displayCurrentQuestion();
 
     // Enable radio buttons for the new question
-    ui->radioButton->setEnabled(true);
+    ui->radioButton_1->setEnabled(true);
     ui->radioButton_2->setEnabled(true);
     ui->radioButton_3->setEnabled(true);
     ui->radioButton_4->setEnabled(true);
@@ -487,7 +487,7 @@ void MainScreen::onAnswerButtonToggled(bool checked)
 
             switch (correctIndex) {
             case 1:
-                correctButton = ui->radioButton;
+                correctButton = ui->radioButton_1;
                 break;
             case 2:
                 correctButton = ui->radioButton_2;
@@ -507,12 +507,13 @@ void MainScreen::onAnswerButtonToggled(bool checked)
         }
 
         // Disable all radio buttons for the current question
-        ui->radioButton->setEnabled(false);
+        ui->radioButton_1->setEnabled(false);
         ui->radioButton_2->setEnabled(false);
         ui->radioButton_3->setEnabled(false);
         ui->radioButton_4->setEnabled(false);
     }
 }
+
 
 
 

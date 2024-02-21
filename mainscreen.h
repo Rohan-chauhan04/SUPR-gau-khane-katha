@@ -72,7 +72,7 @@ private:
     int currentQuestionIndex;
     int score;
 
-    QRadioButton *radioButton;
+    QRadioButton *radioButton_1;
     QRadioButton *radioButton_2;
     QRadioButton *radioButton_3;
     QRadioButton *radioButton_4;
